@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html><head></head><body>
+<html>
+  <head></head>
+  <body>
+    <h1>Testing Snake</h1>
 
-<h1>Testing Snake</h1>
-
-<script language="javascript" src="snake.js">
-</script>
-<pre>
+    <script language="javascript" src="snake.js"></script>
+    <pre>
 
 <script language="javascript">
 
@@ -37,6 +37,16 @@ ok.push(direction === east);
 changeDirection(countercw);
 ok.push(direction === north);
 
+
+ok.push(gameOver === false);
+changeDirection(countercw);
+nextBoard();
+changeDirection(countercw);
+nextBoard();
+changeDirection(countercw);
+nextBoard();
+ok.push(gameOver === true);
+
 // test result report
 if ( ok.every( elem => elem) ) {
     document.writeln("All "+ ok.length +" tests ok.");
@@ -54,5 +64,7 @@ if ( ok.every( elem => elem) ) {
 </script>
 
 </pre>
-</body>
-<html>
+  </body>
+  <html></html>
+</html>
+

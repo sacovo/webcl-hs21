@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>CSSValidation</title>
     <style>
-        form {
-            display: grid;
-            grid-template-columns: max-content max-content;
-            grid-gap: .3em 1em;
-        }
-        input:invalid {
-            color: red;
-        }
-
+      form {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        grid-gap: 0.3em 1em;
+      }
+      input:invalid {
+        color: red;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    Show various input types and how they validate.
 
-Show various input types and how they validate.
+    <form>
+      <label for="input1">text, search </label>
+      <input id="input1" type="text" pattern="[a-z]*" />
+      <label for="input2">list </label> <input list="inputs" />
+      <label for="input3">email </label> <input type="email" />
+      <label for="input4">url </label> <input type="url" />
+      <label for="input5">tel </label> <input type="tel" />
+      <label for="input5">number </label> <input type="number" />
+      <label for="input6">date </label> <input type="date" />
+      <label for="input7">datetime-local</label>
+      <input type="datetime-local" /> <label for="input8">time </label>
+      <input type="time" /> <label for="input9">week </label>
+      <input type="week" /> <label for="input10">month </label>
+      <input type="month" /> <label for="input11">color </label>
+      <input type="color" />
+    </form>
+    radio, checkbox, range
 
-<form>
-    <label for="input1">text, search  </label>  <input id="input1" type="text" pattern="[a-z]*">
-    <label>list          </label>  <input list="inputs">
-    <label>email         </label>  <input type="email" >
-    <label>url           </label>  <input type="url" >
-    <label>tel           </label>  <input type="tel" >
-    <label>number        </label>  <input type="number" >
-    <label>date          </label>  <input type="date" >
-    <label>datetime-local</label>  <input type="datetime-local" >
-    <label>time          </label>  <input type="time" >
-    <label>week          </label>  <input type="week" >
-    <label>month         </label>  <input type="month" >
-    <label>color         </label>  <input type="color" >
-</form>
-radio, checkbox, range
-
-<datalist id="inputs">
-  <option value="a aa aaa aaaa">
-  <option value="b bb bbb bbbb">
-  <option value="c cc ccc cccc">
-</datalist>
-
-</body>
+    <datalist id="inputs">
+      <option value="a aa aaa aaaa"></option>
+      <option value="b bb bbb bbbb"></option>
+      <option value="c cc ccc cccc"></option>
+    </datalist>
+  </body>
 </html>

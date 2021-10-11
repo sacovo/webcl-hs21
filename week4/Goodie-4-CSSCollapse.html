@@ -20,7 +20,7 @@
         }
 
         /* collapsed div todo: change css selector*/
-        .changeme {
+        input[type=checkbox].hidden:checked + label.toggle + div.collapsible {
             max-height: 0;
             transition:  max-height 0.5s ease-out;
         }
@@ -44,7 +44,7 @@
         }
 
         /* todo rotate arrow on collapse */
-        .changeme {
+        input[type=checkbox].hidden:checked + label.toggle::before {
             transform: rotate(-90deg);
             transition: transform 0.5s;
         }

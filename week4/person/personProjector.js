@@ -18,8 +18,7 @@ const bindTextInput = (textAttr, inputElement) => {
         ? inputElement.removeAttribute("readonly")
         : inputElement.setAttribute("readonly", true));
 
-    // todo: the label property should be shown as a pop-over on the text element.
-
+    textAttr.getObs(LABEL, true).onChange(label => inputElement.setAttribute("title", label));
 };
 
 const personTextProjector = textAttr => {
@@ -40,8 +39,8 @@ const personListItemProjector = (masterController, selectionController, rootElem
     deleteButton.innerHTML  = "&times;";
     deleteButton.onclick    = _ => masterController.removePerson(person);
 
-    const firstnameInputElement = null; // todo create the input fields and bind to the attribute props
-    const lastnameInputElement  = null;
+    const firstnameInputElement = personTextProjector(person.firstname);
+    const lastnameInputElement  = personTextProjector(person.lastname);
 
     // todo: when a line in the master view is clicked, we have to set the selection
 

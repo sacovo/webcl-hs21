@@ -1,31 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Personen</title>
-    <link rel="stylesheet" href="../person.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../person.css" />
+  </head>
+  <body>
+    <div class="card">
+      <h1>Person List</h1>
 
-<div class="card">
-    <h1>Person List</h1>
-
-    <div class="holder">
-        <button id="plus" autofocus> + </button>
+      <div class="holder">
+        <button id="plus" autofocus>+</button>
         <div class="master" id="masterContainer"></div>
+      </div>
     </div>
-</div>
 
-<div class="card">
-    <h1>Person Detail</h1>
+    <div class="card">
+      <h1>Person Detail</h1>
 
-    <div class="holder" id="detailContainer">
+      <div class="holder" id="detailContainer">
         <div class="placeholder"></div>
+      </div>
     </div>
-</div>
 
-<script src="personStarter.js" type="module"></script>
+    <script type="module">
+      import {
+        MasterController,
+        SelectionController,
+        MasterView,
+        DetailView,
+      } from "./person.js";
 
-</body>
+      const masterController = MasterController();
+      const selectionController = SelectionController();
 
+      // create the sub-views, incl. binding
+
+      MasterView(
+        masterController,
+        selectionController,
+        document.getElementById("masterContainer")
+      );
+      DetailView(
+        selectionController,
+        document.getElementById("detailContainer")
+      );
+
+      // binding of the main view
+
+      document.getElementById("plus").onclick = (_) =>
+        masterController.addPerson();
+    </script>
+  </body>
 </html>

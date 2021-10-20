@@ -25,7 +25,8 @@ const ObservableList = list => {
     const removeAt     = array => index => array.splice(index, 1);
     const removeItem   = array => item  => { const i = array.indexOf(item); if (i>=0) removeAt(array)(i); };
     const listRemoveItem     = removeItem(list);
-    const delListenersRemove = removeAt(delListeners);
+    // const delListenersRemove = removeAt(delListeners);
+    const delListenersRemove = removeItem(delListeners);
     return {
         onAdd: listener => addListeners.push(listener),
         onDel: listener => delListeners.push(listener),
@@ -37,7 +38,8 @@ const ObservableList = list => {
         del: item => {
             listRemoveItem(item);
             const safeIterate = [...delListeners]; // shallow copy as we might change listeners array while iterating
-            safeIterate.forEach( (listener, index) => listener(item, () => delListenersRemove(index) ));
+            // safeIterate.forEach( (listener, index) => listener(item, () => delListenersRemove(index) ));
+            safeIterate.forEach( (listener) => listener(item, () => delListenersRemove(listener) ));
         },
         removeDeleteListener: removeItem(delListeners),
         count:   ()   => list.length,

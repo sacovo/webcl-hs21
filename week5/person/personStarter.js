@@ -1,5 +1,5 @@
 
-import { MasterController, SelectionController, MasterView, DetailView } from './person.js';
+import { MasterController, SelectionController, MasterView, MasterTableView, DetailView } from './person.js';
 
 const masterController    = MasterController();
 const selectionController = SelectionController();
@@ -8,7 +8,9 @@ const selectionController = SelectionController();
 
 MasterView(masterController, selectionController, document.getElementById('masterContainer'));
 DetailView(selectionController, document.getElementById('detailContainer'));
+MasterTableView(masterController, selectionController, document.getElementById('masterTableContainer'));
 
 // binding of the main view
 
-document.getElementById('plus').onclick    = _ => masterController.addPerson();
+document.querySelectorAll(".plus").forEach((btn) => btn.onclick = _ => masterController.addPerson());
+

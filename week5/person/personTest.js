@@ -1,4 +1,4 @@
-import {MasterController, SelectionController, MasterView, DetailView} from './person.js';
+import {MasterController, SelectionController, MasterView, DetailView, MasterTableView} from './person.js';
 import {Suite} from '../test/test.js';
 
 const personSuite = Suite('person');
@@ -6,6 +6,8 @@ const personSuite = Suite('person');
 function setup() {
     const masterContainer = document.createElement('div');
     const detailContainer = document.createElement('div');
+    const tableContainer = document.createElement('div');
+
     detailContainer.innerHTML = '<div>to replace</div>';
 
     const masterController = MasterController();
@@ -13,9 +15,13 @@ function setup() {
 
     MasterView(masterController, selectionController, masterContainer);
     DetailView(selectionController, detailContainer);
+    MasterTableView(masterController, selectionController, tableContainer);
 
     const masterFirstnameInput = row => masterContainer.querySelectorAll('input[type=text]')[row * 2];
     const masterLastnameInput = row => masterContainer.querySelectorAll('input[type=text]')[row * 2 + 1];
+
+    const tableLastnameInput = row => tableContainer.querySelectorAll('input[type=text]')[row * 2 + 1];
+    const tableFirstnameInput = row => tableContainer.querySelectorAll('input[type=text]')[row * 2 + 1];
 
     const detailFirstnameInput = () => detailContainer.querySelector('#firstname');
     const detailLastnameInput = () => detailContainer.querySelector('#lastname');
@@ -34,7 +40,9 @@ function setup() {
         masterLastnameInput,
         detailFirstnameInput,
         detailLastnameInput,
-        updateInput
+        updateInput,
+        tableLastnameInput,
+        tableFirstnameInput,
     };
 }
 
@@ -138,7 +146,7 @@ personSuite.add('clear selection', assert => {
 });
 
 personSuite.add('no update on other attributes', assert => {
-    const {masterController, masterFirstnameInput, masterLastnameInput, detailFirstnameInput, detailLastnameInput, updateInput} = setup();
+    const {masterController, masterFirstnameInput, masterLastnameInput, detailFirstnameInput, detailLastnameInput, updateInput, tableFirstNameInput, tableLastnameInput} = setup();
 
     //given
     let expectedFirstname = 'Monika';
@@ -164,6 +172,8 @@ personSuite.add('no update on other attributes', assert => {
     //then
     assert.is(masterFirstnameInput(0).value, updatedFirstname);
     assert.is(masterLastnameInput(0).value, updatedLastname);
+    assert.is(tableLastnameInput(0).value, updatedLastname);
+
 });
 
 personSuite.add('deletes first row', assert => {

@@ -1,8 +1,8 @@
 import { ObservableList, Observable }                       from "../observable/observable.js";
 import { Attribute, LABEL }                                 from "../presentationModel/presentationModel.js";
-import { personListItemProjector, personFormProjector }     from "./personProjector.js";
+import { personListItemProjector, personFormProjector, personTableRowProjector }     from "./personProjector.js";
 
-export { MasterController, MasterView, SelectionController, DetailView }
+export { MasterController, MasterView, MasterTableView, SelectionController, DetailView }
 
 const Person = () => {                               // facade
     const firstnameAttr = Attribute("Monika");
@@ -43,6 +43,18 @@ const MasterView = (masterController, selectionController, rootElement) => {
     // binding
     masterController.onPersonAdd(render);
 };
+
+const MasterTableView = (masterController, selectionController, rootElement) => {
+    const tableElement = document.createElement("TABLE");
+    const tableBody = document.createElement("TBODY");
+    tableElement.appendChild(tableBody);
+    rootElement.appendChild(tableElement);
+
+    const render = person =>
+        personTableRowProjector(masterController, selectionController, tableBody, person);
+
+    masterController.onPersonAdd(render);
+}
 
 const NoPerson = (() => { // one time creation, singleton
     const johnDoe = Person();

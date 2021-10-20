@@ -65,4 +65,34 @@ observable.add("list", assert => {
 
 });
 
+observable.add("multiple remove listeners", assert => {
+    const raw = [];
+    const list = ObservableList(raw);
+
+    let countOne = 0;
+    let countTwo = 0;
+
+    let observableOne = (_, removeMe) => {
+        countOne += 1;
+        removeMe();
+    }
+
+    let observableTwo = (_, removeMe) => {
+        countTwo += 1;
+        removeMe();
+    }
+
+    list.onDel(observableTwo);
+    list.onDel(observableOne);
+
+    list.add(1);
+    list.add(2);
+
+    list.del(1);
+    list.del(2);
+
+    assert.is(countOne, 1);
+    assert.is(countTwo, 1);
+})
+
 observable.run();
